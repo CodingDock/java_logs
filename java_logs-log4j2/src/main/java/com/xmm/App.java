@@ -9,19 +9,22 @@ import org.apache.logging.log4j.Logger;
  */
 public class App 
 {
-    private static final Logger logger= LogManager.getLogger(App.class);
+    private static final Logger logger= LogManager.getLogger("mylog");
     
     public static void main( String[] args )
     {
 
         if(logger.isTraceEnabled()){
-            logger.debug("log4j trace message");
+            logger.trace("log4j trace message");
         }
         if(logger.isDebugEnabled()){
             logger.debug("log4j debug message");
         }
         if(logger.isInfoEnabled()){
-            logger.debug("log4j info message");
+            logger.info("log4j info message");
+        }
+        if(logger.isErrorEnabled()){
+            logger.error("log4j error message");
         }
         
     }
