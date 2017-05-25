@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 */target/
+/java_logs-log4j2/java_logs-log4j2.iml
+/java_logs.iml
