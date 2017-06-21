@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30"> 
+<Configuration status="info" monitorInterval="30"> 
     <Appenders> 
         <Console name="Console" target="SYSTEM_OUT"> 
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}:%l - %msg%n"/> 
+            <PatternLayout pattern="%d [%t] %-5level %logger{36}:%l - %msg%n"/> 
         </Console>
         
-        <File name="MyFile" fileName="D:/logs/app.log">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36}:%l - %msg%n" />
+        <File name="infoLog" fileName="D:/logs/info.log">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d [%t] %-5level %logger{36}:%l - %msg%n" />
+        </File>
+        <File name="warnLog" fileName="D:/logs/warn.log">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d [%t] %-5level %logger{36}:%l - %msg%n" />
+        </File>
+        <File name="errorLog" fileName="D:/logs/error.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t] %-5level %logger{36}:%l - %msg%n" />
         </File>
     </Appenders> 
     <Loggers>
-        <Logger name="mylog" level="info" additivity="true">
-            <AppenderRef ref="MyFile" />
+        <Logger name="com.xmm" level="info" additivity="false">
+            <AppenderRef ref="infoLog" />
+            <AppenderRef ref="warnLog" />
+            <AppenderRef ref="errorLog" />
         </Logger>
         <Root level="error"> 
             <AppenderRef ref="Console"/> 
